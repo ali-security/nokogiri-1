@@ -574,6 +574,11 @@ jobs:
           path: gems
       - run: ./scripts/test-gem-install gems --${{matrix.sys}}-system-libraries
         shell: bash
+      - name: Print mkmf logs if job failed on Windows
+        if: ${{ failure() && startsWith( matrix.os, 'windows' ) }}
+        run: |
+          ridk exec cat C:/hostedtoolcache/windows/Ruby/*/*/lib/ruby/gems/*/extensions/*/*/nokogiri*/mkmf.log
+          ridk exec gcc -v
 
   cruby-package:
     needs: ["rcd_image_version"]
