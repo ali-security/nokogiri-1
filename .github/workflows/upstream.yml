@@ -79,7 +79,7 @@ jobs:
           apt-get: "libxml2-dev libxslt1-dev pkg-config"
           mingw: "_upgrade_ libxml2 libxslt pkgconf"
           bundler-cache: true
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         if: matrix.sys == 'disable'
         with:
           path: ports
@@ -103,7 +103,7 @@ jobs:
           ruby-version: "head"
           apt-get: "libxml2-dev libxslt1-dev pkg-config valgrind"
           bundler-cache: true
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         if: matrix.sys == 'disable'
         with:
           path: ports
@@ -132,7 +132,7 @@ jobs:
   #     - uses: actions/checkout@v2
   #       with:
   #         submodules: true
-  #     - uses: actions/cache@v2
+  #     - uses: actions/cache@v4
   #       with:
   #         path: ports
   #         key: ports-ubuntu-${{hashFiles('dependencies.yml', 'patches/**/*.patch')}}
