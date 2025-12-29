@@ -304,13 +304,14 @@ jobs:
   jruby-package:
     name: "jruby-package"
     runs-on: ubuntu-latest
-    container:
-      image: "larskanis/rake-compiler-dock-jruby:1.2.2"
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - run: ./scripts/test-gem-build gems java
+      - run: |
+            docker run --rm -v "$(pwd):/nokogiri" -w /nokogiri \
+            larskanis/rake-compiler-dock-jruby:1.2.2 \
+            ./scripts/test-gem-build gems java
       - uses: actions/upload-artifact@v4
         with:
           name: jruby-gem
